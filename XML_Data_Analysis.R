@@ -52,23 +52,41 @@ Madhu2012.Clean=Madhu2012[Madhu2012[25]=='Y',] #gets rid of duplicated rows
 FirstAuthor=Madhu2012.Clean$MedlineCitation.Article.AuthorList.Author.LastName
 SecondAuthor=Madhu2012.Clean$MedlineCitation.Article.AuthorList.Author.LastName.1
 ThirdAuthor=Madhu2012.Clean$MedlineCitation.Article.AuthorList.Author.LastName.2
-FourthAuthor=Madhu2012.Clean$MedlineCitation.Article.AuthorList.Author.LastName.3
+#removing NAs
+Madhu2012.Na.Rm4=Madhu2012.Clean[!is.na(Madhu2012.Clean$MedlineCitation.Article.AuthorList.Author.LastName.3),]
+FourthAuthor=Madhu2012.Na.Rm4$MedlineCitation.Article.AuthorList.Author.LastName.3
+Madhu2012.Na.Rm5=Madhu2012.Clean[!is.na(Madhu2012.Clean$MedlineCitation.Article.AuthorList.Author.LastName.4),]
+FifthAuthor=Madhu2012.Na.Rm5$MedlineCitation.Article.AuthorList.Author.LastName.4
+Madhu2012.Na.Rm6=Madhu2012.Clean[!is.na(Madhu2012.Clean$MedlineCitation.Article.AuthorList.Author.LastName.5),]
+SixthAuthor=Madhu2012.Na.Rm6$MedlineCitation.Article.AuthorList.Author.LastName.5
+Madhu2012.Na.Rm7=Madhu2012.Clean[!is.na(Madhu2012.Clean$MedlineCitation.Article.AuthorList.Author.LastName.6),]
+SeventhAuthor=Madhu2012.Na.Rm7$MedlineCitation.Article.AuthorList.Author.LastName.6
+Madhu2012.Na.Rm8=Madhu2012.Clean[!is.na(Madhu2012.Clean$MedlineCitation.Article.AuthorList.Author.LastName.7),]
+EigthAuthor=Madhu2012.Na.Rm8$MedlineCitation.Article.AuthorList.Author.LastName.7
+Madhu2012.Na.Rm9=Madhu2012.Clean[!is.na(Madhu2012.Clean$MedlineCitation.Article.AuthorList.Author.LastName.8),]
+NinthAuthor=Madhu2012.Na.Rm9$MedlineCitation.Article.AuthorList.Author.LastName.8
+Madhu2012.Na.Rm10=Madhu2012.Clean[!is.na(Madhu2012.Clean$MedlineCitation.Article.AuthorList.Author.LastName.9),]
+TenthAuthor=Madhu2012.Na.Rm10$MedlineCitation.Article.AuthorList.Author.LastName.9
+Madhu2012.Na.Rm11=Madhu2012.Clean[!is.na(Madhu2012.Clean$MedlineCitation.Article.AuthorList.Author.LastName.10),]
+EleventhAuthor=Madhu2012.Na.Rm11$MedlineCitation.Article.AuthorList.Author.LastName.10
 
-pdf('AuthorHist.pdf')
-ggplot(Madhu2012.Clean, aes(x=FirstAuthor)) + geom_histogram(binwidth=.5, colour="pink", fill="purple")+coord_flip() #Memtsoudis most frequent
-ggplot(Madhu2012.Clean, aes(x=SecondAuthor)) + geom_histogram(binwidth=.5, colour="pink", fill="purple")+coord_flip() #Yan, Chui, Kirksey most frequent
-ggplot(Madhu2012.Clean, aes(x=ThirdAuthor)) + geom_histogram(binwidth=.5, colour="pink", fill="purple")+coord_flip() #Ma most frequent
-ggplot(Madhu2012.Clean, aes(x=FourthAuthor)) + geom_histogram(binwidth=.5, colour="pink", fill="purple")+coord_flip() #Mazumdar most frequent
-dev.off()
+#write all the graphs to pdf on 3 canvases
+a=ggplot(Madhu2012.Clean, aes(x=FirstAuthor)) + geom_histogram(binwidth=.5, colour="pink", fill="purple")+coord_flip() 
+b=ggplot(Madhu2012.Clean, aes(x=SecondAuthor)) + geom_histogram(binwidth=.5, colour="pink", fill="purple")+coord_flip() 
+c=ggplot(Madhu2012.Clean, aes(x=ThirdAuthor)) + geom_histogram(binwidth=.5, colour="pink", fill="purple")+coord_flip() 
+d=ggplot(Madhu2012.Na.Rm4, aes(x=FourthAuthor)) + geom_histogram(binwidth=.5, colour="pink", fill="purple")+coord_flip() 
+e=ggplot(Madhu2012.Na.Rm5, aes(x=FifthAuthor)) + geom_histogram(binwidth=.5, colour="pink", fill="purple")+coord_flip() 
+f=ggplot(Madhu2012.Na.Rm6, aes(x=SixthAuthor)) + geom_histogram(binwidth=.5, colour="pink", fill="purple")+coord_flip() 
+g=ggplot(Madhu2012.Na.Rm7, aes(x=SeventhAuthor)) + geom_histogram(binwidth=.5, colour="pink", fill="purple")+coord_flip() 
+h=ggplot(Madhu2012.Na.Rm8, aes(x=EigthAuthor)) + geom_histogram(binwidth=.5, colour="pink", fill="purple")+coord_flip()
+i=ggplot(Madhu2012.Na.Rm9, aes(x=NinthAuthor)) + geom_histogram(binwidth=.5, colour="pink", fill="purple")+coord_flip()
+j=ggplot(Madhu2012.Na.Rm10, aes(x=TenthAuthor)) + geom_histogram(binwidth=.5, colour="pink", fill="purple")+coord_flip()
+k=ggplot(Madhu2012.Na.Rm11, aes(x=EleventhAuthor)) + geom_histogram(binwidth=.5, colour="pink", fill="purple")+coord_flip()
 
-#write all the graphs to one canvas
-a=ggplot(Madhu2012.Clean, aes(x=FirstAuthor)) + geom_histogram(binwidth=.5, colour="pink", fill="purple")+coord_flip() #1st author
-b=ggplot(Madhu2012.Clean, aes(x=SecondAuthor)) + geom_histogram(binwidth=.5, colour="pink", fill="purple")+coord_flip() #2nd author
-c=ggplot(Madhu2012.Clean, aes(x=ThirdAuthor)) + geom_histogram(binwidth=.5, colour="pink", fill="purple")+coord_flip() #3rd author
-d=ggplot(Madhu2012.Clean, aes(x=FourthAuthor)) + geom_histogram(binwidth=.5, colour="pink", fill="purple")+coord_flip() #4th author
-
-jpeg('AuthHist.jpeg')
+pdf("AuthorHistogram.pdf")
 grid.arrange(a,b,c,d)
+grid.arrange(e,f,g,h)
+grid.arrange(i,j,k)
 dev.off()
 
 #exporting data
